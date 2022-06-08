@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nft_marketplace_integration/models/nf_card_model.dart' show NFTCardModel;
+import 'package:nft_marketplace_integration/widgets/list_view_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,14 +26,24 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: NFTCardModel.getMockData(),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        if (snapshot.hasData) {
-          print(snapshot.data);
-        }
-        return Container();
-      },
+    return Scaffold(
+      body: Center(
+        child: FutureBuilder<List<NFTCardModel>>(
+          future: NFTCardModel.getMockData(),
+          builder: (BuildContext context, AsyncSnapshot<List<NFTCardModel>> snapshot) {
+            if (snapshot.hasData) {
+              print(snapshot.data);
+              return Column(
+                children: [
+                  for (int i = 1; i < 5; i++)
+                    Expanded(child: ListViewWidget(nfts: snapshot.data!.sublist((i-1)*8, i*8)))
+                ],
+              );
+            }
+            return Container();
+          },
+        ),
+      ),
     );
   }
 }
