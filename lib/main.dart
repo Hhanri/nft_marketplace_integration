@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nft_marketplace_integration/models/nf_card_model.dart' show NFTCardModel;
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +25,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return FutureBuilder(
+      future: NFTCardModel.getMockData(),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        if (snapshot.hasData) {
+          print(snapshot.data);
+        }
+        return Container();
+      },
+    );
   }
 }
