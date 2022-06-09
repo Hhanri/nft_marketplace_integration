@@ -1,4 +1,8 @@
+import 'dart:math';
+
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:nft_marketplace_integration/helpers/round_number.dart';
 import 'package:nft_marketplace_integration/models/nf_card_model.dart';
 
 class ListViewWidget extends StatelessWidget {
@@ -7,20 +11,28 @@ class ListViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    final int scrollSpeed = roundNumber(Random().nextInt(1000) + 1000);
+    print(scrollSpeed);
     final int length = nfts.length;
     return SizedBox(
       height: 100,
-      width: double.maxFinite,
-      child: ListView.builder(
+      width: double.infinity,
+      child: CarouselSlider.builder(
         itemCount: nfts.length,
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) {
-          return SizedBox(
-            height: 100,
-            child: Image.asset(nfts[index % length].imageLink),
-          );
+        options: CarouselOptions(
+          scrollDirection: Axis.horizontal,
+          autoPlay: true,
+          autoPlayAnimationDuration: Duration(milliseconds: scrollSpeed),
+          autoPlayInterval: Duration(milliseconds: scrollSpeed),
+          autoPlayCurve: Curves.linear,
+          scrollPhysics: const BouncingScrollPhysics(),
+          viewportFraction: 0.25,
+          disableCenter: true,
+          height: 100,
+          pageSnapping: false
+        ),
+        itemBuilder: (BuildContext context, int index, int pageIndex) {
+          return Image.asset(nfts[index % length].imageLink, fit: BoxFit.cover,);
         },
       ),
     );
