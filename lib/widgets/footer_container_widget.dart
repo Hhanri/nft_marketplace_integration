@@ -11,10 +11,10 @@ class FooterContainerWidget extends StatelessWidget {
       width: double.maxFinite,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.purpleAccent,
+        color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.purpleAccent.withOpacity(0.9),
+            color: Theme.of(context).scaffoldBackgroundColor,
             blurRadius: 60,
             spreadRadius: 70
           )

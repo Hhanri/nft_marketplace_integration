@@ -8,10 +8,6 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateColor.resolveWith((states) => Colors.purple),
-
-      ),
       onPressed: onTap,
       child: Text(text)
     );
