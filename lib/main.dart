@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'NFT Marketplace',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.purpleAccent
       ),
       home: const HomePage(),
     );
