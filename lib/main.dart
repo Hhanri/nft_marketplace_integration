@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nft_marketplace_integration/helpers/theme.dart';
-import 'package:nft_marketplace_integration/screens/home_page.dart';
+import 'package:nft_marketplace_integration/helpers/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'NFT Marketplace',
       theme: getTheme(context),
-      home: const HomePage(),
+      onGenerateRoute: AppRouter().onGenerate,
     );
   }
 }

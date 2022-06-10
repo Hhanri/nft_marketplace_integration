@@ -9,13 +9,15 @@ class NFTCardModel extends Equatable{
   final String serialNumber;
   final String hash;
   final String owner;
+  final double price;
 
   const NFTCardModel({
     required this.imageLink,
     required this.collection,
     required this.serialNumber,
     required this.owner,
-    required this.hash
+    required this.hash,
+    required this.price
   });
 
   static Future<List<NFTCardModel>> getMockData() async {
@@ -26,7 +28,8 @@ class NFTCardModel extends Equatable{
         collection: "Bored Ape",
         serialNumber: filePath.getFileName(),
         hash: getRandomStr(10),
-        owner: "Hanri"
+        owner: "Hanri",
+        price: 50
       );
     }).toList();
   }
