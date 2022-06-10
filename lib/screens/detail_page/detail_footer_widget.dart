@@ -17,7 +17,7 @@ class DetailFooterWidget extends StatelessWidget {
     final opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(opacityController);
 
     return AnimatedCrossFade(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 300),
       firstChild: FooterStep1(
         opacityController: opacityController,
         opacityAnimation: opacityAnimation,
@@ -25,8 +25,8 @@ class DetailFooterWidget extends StatelessWidget {
         onPay: onPay,
       ),
       secondChild: FooterStep2(opacityController: opacityController, opacityAnimation: opacityAnimation, nftCardModel: nftCardModel),
-      firstCurve: Curves.ease,
-      secondCurve: Curves.ease,
+      firstCurve: Curves.linearToEaseOut,
+      secondCurve: Curves.decelerate,
       crossFadeState: crossFadeState,
     );
   }
