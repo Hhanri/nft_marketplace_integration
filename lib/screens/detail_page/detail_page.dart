@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nft_marketplace_integration/models/nf_card_model.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:nft_marketplace_integration/screens/detail_page/detail_footer_widget.dart';
-import 'package:nft_marketplace_integration/widgets/button_widget.dart';
 import 'package:nft_marketplace_integration/screens/detail_page/image_card_widget.dart';
 
 class DetailPage extends HookWidget {
@@ -14,10 +13,10 @@ class DetailPage extends HookWidget {
     final imageAnimationController = useAnimationController(
       duration: const Duration(milliseconds: 200),
     );
-    final firstFooterOpacityAnimationController = useAnimationController(
-      duration: const Duration(milliseconds: 700)
+    final opacityAnimationController = useAnimationController(
+      duration: const Duration(milliseconds: 500)
     );
-    Future.delayed(const Duration(milliseconds: 300)).then((value) => firstFooterOpacityAnimationController.forward());
+    Future.delayed(const Duration(milliseconds: 300)).then((value) => opacityAnimationController.forward());
 
     final crossFadeState = useState(CrossFadeState.showFirst);
     return Scaffold(
@@ -31,7 +30,7 @@ class DetailPage extends HookWidget {
           ),
           DetailFooterWidget(
             crossFadeState: crossFadeState.value,
-            opacityController: firstFooterOpacityAnimationController,
+            opacityController: opacityAnimationController,
             onPay: () {
               imageAnimationController.forward();
               crossFadeState.value = CrossFadeState.showSecond;

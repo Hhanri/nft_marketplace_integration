@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nft_marketplace_integration/screens/detail_page/text_row_wodget.dart';
+import 'package:nft_marketplace_integration/screens/detail_page/text_row_widget.dart';
 
 class OwnerCardWidget extends StatelessWidget {
   final String previousOwner;
