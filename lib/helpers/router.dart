@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nft_marketplace_integration/models/nf_card_model.dart';
-import 'package:nft_marketplace_integration/screens/detail_page.dart';
+import 'package:nft_marketplace_integration/screens/detail_page/detail_page.dart';
 import 'package:nft_marketplace_integration/screens/home_page.dart';
 
 class AppRouter {

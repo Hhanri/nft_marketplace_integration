@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
       children: [
         const TiltedListViewWidget(),
         FooterContainerWidget(
+          height: MediaQuery.of(context).size.height - 420,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
