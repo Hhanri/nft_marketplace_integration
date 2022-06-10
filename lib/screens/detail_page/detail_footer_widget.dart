@@ -8,30 +8,42 @@ import 'package:nft_marketplace_integration/widgets/footer_container_widget.dart
 class DetailFooterWidget extends StatelessWidget {
   final NFTCardModel nftCardModel;
   final AnimationController opacityController;
-  final AnimationController imageAnimationController;
-  const DetailFooterWidget({Key? key, required this.opacityController, required this.nftCardModel, required this.imageAnimationController}) : super(key: key);
+  final VoidCallback onPay;
+  final CrossFadeState crossFadeState;
+  const DetailFooterWidget({Key? key, required this.opacityController, required this.nftCardModel, required this.onPay, required this.crossFadeState}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(opacityController);
-    //return FooterStep1(opacityController: opacityController, opacityAnimation: opacityAnimation, nftCardModel: nftCardModel, imageAnimationController: imageAnimationController);
-    return FooterStep2(opacityController: opacityController, opacityAnimation: opacityAnimation, nftCardModel: nftCardModel);
+
+    return AnimatedCrossFade(
+      duration: const Duration(milliseconds: 500),
+      firstChild: FooterStep1(
+        opacityController: opacityController,
+        opacityAnimation: opacityAnimation,
+        nftCardModel: nftCardModel,
+        onPay: onPay,
+      ),
+      secondChild: FooterStep2(opacityController: opacityController, opacityAnimation: opacityAnimation, nftCardModel: nftCardModel),
+      firstCurve: Curves.ease,
+      secondCurve: Curves.ease,
+      crossFadeState: crossFadeState,
+    );
   }
 }
 
 class FooterStep1 extends StatelessWidget {
+  final AnimationController opacityController;
+  final Animation<double> opacityAnimation;
+  final NFTCardModel nftCardModel;
+  final VoidCallback onPay;
   const FooterStep1({
     Key? key,
     required this.opacityController,
     required this.opacityAnimation,
     required this.nftCardModel,
-    required this.imageAnimationController,
+    required this.onPay,
   }) : super(key: key);
-
-  final AnimationController opacityController;
-  final Animation<double> opacityAnimation;
-  final NFTCardModel nftCardModel;
-  final AnimationController imageAnimationController;
 
   @override
   Widget build(BuildContext context) {
@@ -42,45 +54,38 @@ class FooterStep1 extends StatelessWidget {
           opacity: opacityAnimation.value,
           child: FooterContainerWidget(
             height: MediaQuery.of(context).size.height * 0.5,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    Text("${nftCardModel.collection} # ${nftCardModel.serialNumber}")
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text("owned by ${nftCardModel.owner}")
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: const [
-                        Text("Remaining Time"),
-                        Text("2:01:45")
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        const Text("Price"),
-                        Text(nftCardModel.price.toString())
-                      ],
-                    )
-                  ],
-                ),
-
-                ButtonWidget(
-                  text: "CLICK",
-                  onTap: () {
-                    imageAnimationController.forward();
-                  }
-                )
-              ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("${nftCardModel.collection} # ${nftCardModel.serialNumber}"),
+                  Text("owned by ${nftCardModel.owner}"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: const [
+                          Text("Remaining Time"),
+                          Text("2:01:45")
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text("Price"),
+                          Text(nftCardModel.price.toString())
+                        ],
+                      )
+                    ],
+                  ),
+                  ButtonWidget(
+                    text: "CLICK",
+                    onTap: onPay,
+                    fullWidth: true,
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -90,16 +95,15 @@ class FooterStep1 extends StatelessWidget {
 }
 
 class FooterStep2 extends StatelessWidget {
+  final AnimationController opacityController;
+  final Animation<double> opacityAnimation;
+  final NFTCardModel nftCardModel;
   const FooterStep2({
     Key? key,
     required this.opacityController,
     required this.opacityAnimation,
     required this.nftCardModel,
   }) : super(key: key);
-
-  final AnimationController opacityController;
-  final Animation<double> opacityAnimation;
-  final NFTCardModel nftCardModel;
 
   @override
   Widget build(BuildContext context) {

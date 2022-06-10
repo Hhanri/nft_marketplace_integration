@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
             children: [
               Text("TITLE", style: Theme.of(context).textTheme.headline4),
               Text("okjwqe oirewio kdsjkl ioeruwioe kldsjfklsdfoi  ioui eiouweio joapf oieure ieur kdj owepas[ pdpoipwop oeropd poidf", style: Theme.of(context).textTheme.bodyText2),
-              ButtonWidget(text: "DISCOVER", onTap: () {})
+              ButtonWidget(text: "DISCOVER", onTap: () {}, fullWidth: false,)
             ],
           ),
         )

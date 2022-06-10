@@ -17,8 +17,9 @@ class DetailPage extends HookWidget {
     final firstFooterOpacityAnimationController = useAnimationController(
       duration: const Duration(milliseconds: 700)
     );
+    Future.delayed(const Duration(milliseconds: 300)).then((value) => firstFooterOpacityAnimationController.forward());
 
-    Future.delayed(const Duration(milliseconds: 700)).then((value) => firstFooterOpacityAnimationController.forward());
+    final crossFadeState = useState(CrossFadeState.showFirst);
     return Scaffold(
       body: Stack(
         alignment: Alignment.bottomCenter,
@@ -29,8 +30,12 @@ class DetailPage extends HookWidget {
             controller: imageAnimationController
           ),
           DetailFooterWidget(
+            crossFadeState: crossFadeState.value,
             opacityController: firstFooterOpacityAnimationController,
-            imageAnimationController: imageAnimationController,
+            onPay: () {
+              imageAnimationController.forward();
+              crossFadeState.value = CrossFadeState.showSecond;
+            },
             nftCardModel: nft
           ),
         ],
