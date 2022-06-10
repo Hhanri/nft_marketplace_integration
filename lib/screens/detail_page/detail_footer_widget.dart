@@ -25,8 +25,8 @@ class DetailFooterWidget extends StatelessWidget {
         onPay: onPay,
       ),
       secondChild: FooterStep2(opacityController: opacityController, opacityAnimation: opacityAnimation, nftCardModel: nftCardModel),
-      firstCurve: Curves.linearToEaseOut,
-      secondCurve: Curves.decelerate,
+      firstCurve: Curves.easeInCirc,
+      secondCurve: Curves.easeOutCirc,
       crossFadeState: crossFadeState,
     );
   }
