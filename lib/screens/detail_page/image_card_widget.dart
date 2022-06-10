@@ -7,7 +7,7 @@ class ImageCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sizeAnimation = Tween<double>(begin: 250, end: 150).animate(controller);
+    final sizeAnimation = Tween<double>(begin: 250, end: 150).animate(CurvedAnimation(parent: controller, curve: Curves.easeIn));
     return Container(
       height: double.infinity,
       alignment: Alignment.topCenter,
