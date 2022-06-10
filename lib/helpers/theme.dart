@@ -13,6 +13,9 @@ ThemeData getTheme(BuildContext context) {
       style: ButtonStyle(
         backgroundColor: MaterialStateColor.resolveWith((states) => Colors.purple),
       )
+    ),
+    iconTheme: const IconThemeData(
+      color: Colors.white
     )
   );
 }
