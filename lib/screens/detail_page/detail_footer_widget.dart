@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:nft_marketplace_integration/helpers/router.dart';
 import 'package:nft_marketplace_integration/models/nf_card_model.dart';
 import 'package:nft_marketplace_integration/screens/detail_page/text_row_widget.dart';
 import 'package:nft_marketplace_integration/screens/detail_page/owner_card_widget.dart';
+import 'package:nft_marketplace_integration/screens/email_confirmation_page/email_confirmation_page.dart';
+import 'package:nft_marketplace_integration/screens/email_confirmation_page/email_confirmation_screen.dart';
 import 'package:nft_marketplace_integration/widgets/button_widget.dart';
 import 'package:nft_marketplace_integration/widgets/footer_container_widget.dart';
 import 'package:nft_marketplace_integration/widgets/show_up_animation_widget.dart';
@@ -141,7 +144,11 @@ class FooterStep2 extends StatelessWidget {
               ),
               const Spacer(),
               FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    PageRouteBuilder(pageBuilder: (context, animation, _) => const EmailConfirmationPage(), opaque: false)
+                  );
+                },
                 child: const Icon(Icons.keyboard_arrow_right_outlined),
               )
             ],
