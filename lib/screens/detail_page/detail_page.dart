@@ -13,10 +13,10 @@ class DetailPage extends HookWidget {
     final imageAnimationController = useAnimationController(
       duration: const Duration(milliseconds: 200),
     );
-    final opacityAnimationController = useAnimationController(
-      duration: const Duration(milliseconds: 500)
+    final footerAnimationController = useAnimationController(
+      duration: const Duration(milliseconds: 600)
     );
-    Future.delayed(const Duration(milliseconds: 300)).then((value) => opacityAnimationController.forward());
+    Future.delayed(const Duration(milliseconds: 300)).then((value) => footerAnimationController.forward());
 
     final crossFadeState = useState(CrossFadeState.showFirst);
     return Scaffold(
@@ -30,7 +30,7 @@ class DetailPage extends HookWidget {
           ),
           DetailFooterWidget(
             crossFadeState: crossFadeState.value,
-            opacityController: opacityAnimationController,
+            controller: footerAnimationController,
             onPay: () {
               imageAnimationController.forward();
               crossFadeState.value = CrossFadeState.showSecond;
